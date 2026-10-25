@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/<உன்-username>/gitops-task.git
+    repoURL: https://github.com/VaixraAws/argocd-k8s.git
     targetRevision: main
     path: argocd
   destination:
