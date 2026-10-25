@@ -6,6 +6,6 @@ resources:
   - hpa.yaml
 images:
   - name: ghcr.io/stefanprodan/podinfo
-    newTag: 6.7.1
+    newTag: 6.7.0
 patches:
   - path: patch.yaml
