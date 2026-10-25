@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: podinfo
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - list:
+        elements:
+          - env: staging
+          - env: production
+  template:
+    metadata:
+      name: "podinfo-{{.env}}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/<உன்-username>/gitops-task.git
+        targetRevision: main
+        path: "apps/podinfo/overlays/{{.env}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{.env}}"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+      ignoreDifferences:
+        - group: apps
+          kind: Deployment
+          jsonPointers:
+            - /spec/replicas
+  templatePatch: |
+    {{- if eq .env "staging" }}
+    spec:
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    {{- end }}

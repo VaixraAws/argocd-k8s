@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podinfo
+  template:
+    metadata:
+      labels:
+        app: podinfo
+    spec:
+      containers:
+        - name: podinfo
+          image: ghcr.io/stefanprodan/podinfo:6.7.1
+          ports:
+            - name: http
+              containerPort: 9898
+          env:
+            - name: PODINFO_LEVEL
+              value: info
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: API_KEY
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 2
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            periodSeconds: 5
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 10
+            failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 100
+            capabilities:
+              drop: ["ALL"]
