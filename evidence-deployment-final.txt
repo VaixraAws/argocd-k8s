@@ -1,0 +1,44 @@
+Sun Oct 25 07:28:35 UTC 2026
+662e2da Promote podinfo image to production 6.7.0
+e159ca0 Promote podinfo image to staging 6.7.0
+54b8bd6 Restore valid podinfo image tag in staging
+NAME                 SYNC STATUS   HEALTH STATUS
+podinfo-production   Synced        Healthy
+podinfo-staging      Synced        Healthy
+root                 Synced        Healthy
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES                               SELECTOR
+deployment.apps/podinfo   1/1     1            1           116m   podinfo      ghcr.io/stefanprodan/podinfo:6.7.0   app=podinfo
+
+NAME                          READY   STATUS    RESTARTS   AGE   IP            NODE                   NOMINATED NODE   READINESS GATES
+pod/podinfo-87c74b85d-chp42   1/1     Running   0          16m   10.244.0.19   gitops-control-plane   <none>           <none>
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES                               SELECTOR
+deployment.apps/podinfo   3/3     3            3           114m   podinfo      ghcr.io/stefanprodan/podinfo:6.7.0   app=podinfo
+
+NAME                           READY   STATUS    RESTARTS   AGE     IP            NODE                   NOMINATED NODE   READINESS GATES
+pod/podinfo-7d65d9964f-7ts2z   1/1     Running   0          3m46s   10.244.0.21   gitops-control-plane   <none>           <none>
+pod/podinfo-7d65d9964f-bnns8   1/1     Running   0          3m43s   10.244.0.22   gitops-control-plane   <none>           <none>
+pod/podinfo-7d65d9964f-jf2rg   1/1     Running   0          3m49s   10.244.0.20   gitops-control-plane   <none>           <none>
+NAME      REFERENCE            TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+podinfo   Deployment/podinfo   cpu: 1%/70%   3         6         3          114m
+NAMESPACE            NAME                                               CPU(cores)   MEMORY(bytes)   
+argocd               argocd-application-controller-0                    3m           82Mi            
+argocd               argocd-applicationset-controller-786b886c7-lf6vh   1m           21Mi            
+argocd               argocd-dex-server-7955884fc4-28bc9                 1m           54Mi            
+argocd               argocd-notifications-controller-b4f8f7dc4-tfk6b    1m           19Mi            
+argocd               argocd-redis-6984599dcf-c8vls                      2m           3Mi             
+argocd               argocd-repo-server-6bdb49b79d-wxg6b                1m           40Mi            
+argocd               argocd-server-56ffd68f-blrdz                       2m           28Mi            
+kube-system          coredns-559f6c778d-r8khm                           2m           12Mi            
+kube-system          coredns-559f6c778d-zzlvd                           1m           13Mi            
+kube-system          etcd-gitops-control-plane                          16m          52Mi            
+kube-system          kindnet-8f8t4                                      1m           16Mi            
+kube-system          kube-apiserver-gitops-control-plane                28m          458Mi           
+kube-system          kube-controller-manager-gitops-control-plane       11m          73Mi            
+kube-system          kube-proxy-t72nw                                   1m           23Mi            
+kube-system          kube-scheduler-gitops-control-plane                7m           33Mi            
+kube-system          metrics-server-84c99cb944-bmsj2                    2m           19Mi            
+local-path-storage   local-path-provisioner-75f7fc7dc5-vbk9v            1m           14Mi            
+production           podinfo-7d65d9964f-7ts2z                           1m           12Mi            
+production           podinfo-7d65d9964f-bnns8                           1m           12Mi            
+production           podinfo-7d65d9964f-jf2rg                           1m           12Mi            
+staging              podinfo-87c74b85d-chp42                            1m           13Mi            

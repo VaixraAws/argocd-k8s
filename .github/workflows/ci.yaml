@@ -1,0 +1,29 @@
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate Kubernetes manifests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Validate staging manifests
+        run: kubectl kustomize apps/podinfo/overlays/staging
+
+      - name: Validate production manifests
+        run: kubectl kustomize apps/podinfo/overlays/production
+
+      - name: Validate root app manifest
+        run: kubectl apply --dry-run=client -f bootstrap/root-app.yaml

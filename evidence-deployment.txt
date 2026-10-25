@@ -1,0 +1,19 @@
+Sun Oct 25 07:06:01 UTC 2026
+NAME                 SYNC STATUS   HEALTH STATUS
+podinfo-production   Synced        Healthy
+podinfo-staging      Synced        Healthy
+root                 Synced        Healthy
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                               SELECTOR
+deployment.apps/podinfo   1/1     1            1           93m   podinfo      ghcr.io/stefanprodan/podinfo:6.7.1   app=podinfo
+
+NAME                           READY   STATUS    RESTARTS   AGE   IP            NODE                   NOMINATED NODE   READINESS GATES
+pod/podinfo-547f87644c-j6t72   1/1     Running   0          93m   10.244.0.14   gitops-control-plane   <none>           <none>
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                               SELECTOR
+deployment.apps/podinfo   3/3     3            3           91m   podinfo      ghcr.io/stefanprodan/podinfo:6.7.1   app=podinfo
+
+NAME                           READY   STATUS    RESTARTS   AGE   IP            NODE                   NOMINATED NODE   READINESS GATES
+pod/podinfo-65467599f6-6hqzj   1/1     Running   0          91m   10.244.0.17   gitops-control-plane   <none>           <none>
+pod/podinfo-65467599f6-cs2gn   1/1     Running   0          91m   10.244.0.15   gitops-control-plane   <none>           <none>
+pod/podinfo-65467599f6-rws87   1/1     Running   0          91m   10.244.0.16   gitops-control-plane   <none>           <none>
+NAME      REFERENCE            TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+podinfo   Deployment/podinfo   cpu: 1%/70%   3         6         3          91m
