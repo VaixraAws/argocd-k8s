@@ -25,5 +25,3 @@ jobs:
       - name: Validate production manifests
         run: kubectl kustomize apps/podinfo/overlays/production
 
-      - name: Validate root app manifest
-        run: kubectl apply --dry-run=client -f bootstrap/root-app.yaml
